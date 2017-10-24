@@ -1,6 +1,6 @@
 
 To run this app:
-+pip install flask
-+chmod +x run.sh
-+./run.sh
++ pip install flask
++ chmod +x run.sh
++ ./run.sh
 
