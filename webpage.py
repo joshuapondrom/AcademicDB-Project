@@ -24,3 +24,16 @@ def professor():
 @app.route('/admin')
 def admin():
     return render_template('admin.html')
+
+@app.route('/searchclass', methods=['POST'])
+def searchclass():
+    given_courseID = request.form['form-field']
+    cursor = connection.cursor()
+    matching_classes = cursor.execute(
+        'SELECT *'
+        'FROM Class C'
+        'WHERE C.Course_ID = given_courseID'
+    ).fetchall()
+    return render_template(
+        'list.html', 
+    )
