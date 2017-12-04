@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+  <div class="text-left" align="Left">
+    <h1>Here is your Schedule</h1>
+  </div>
+  <table border = 1>
+     <thead>
+        <td>Class ID</td>
+        <td>Course ID</td>
+        <td>DayCode</td>
+        <td>Time</td>
+        <td>Room Number</td>
+        <td>Address</td>
+     </thead>
+     {% for row in rows %}
+        <tr>
+           <td>{{row["Class_ID"]}}</td>
+           <td>{{row["Course_ID"]}}</td>
+           <td>{{row["DayCode"]}}</td>
+           <td>{{row["Time"]}}</td>
+           <td>{{row["Room_Number"]}}</td>
+           <td>{{row["Address"]}}</td>
+        </tr>
+     {% endfor %}
+  </table>
+{% endblock %}
