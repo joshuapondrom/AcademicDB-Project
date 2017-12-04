@@ -42,7 +42,7 @@ def searchclass():
     )
 
 @app.route('/students')
-def list():
+def students():
     db = sql.connect('data.db')
     db.row_factory = sql.Row
 
@@ -51,3 +51,14 @@ def list():
 
     rows = curr.fetchall();
     return render_template("students.html", rows = rows)
+
+@app.route('/classes')
+def classes():
+    db = sql.connect('data.db')
+    db.row_factory = sql.Row
+
+    curr = db.cursor()
+    curr.execute("Select * from Class")
+
+    rows = curr.fetchall();
+    return render_template("classes.html", rows = rows)
