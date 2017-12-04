@@ -78,14 +78,14 @@ def profschedule():
     curr.execute('''
       SELECT T.Class_ID, T.Course_ID, C.DayCode, C.Time, R.Room_Number, R.Address
       FROM TaughtBy T, ClassInRoom R, Class C
-      WHERE T.ID = %d AND T.Class_ID = R.Class_ID AND T.Course_ID = R.Course_ID AND T.Class_ID = C.Class_ID AND T.Course_ID = C.Course_ID AND R.Class_ID = C.Class_ID AND R.Course_ID = C.Course_ID
+      WHERE T.ID = %s AND T.Class_ID = R.Class_ID AND T.Course_ID = R.Course_ID AND T.Class_ID = C.Class_ID AND T.Course_ID = C.Course_ID AND R.Class_ID = C.Class_ID AND R.Course_ID = C.Course_ID
     ''' %(given_id))
 
     rows = curr.fetchall();
     return render_template("schedule.html", rows = rows)
 
 @app.route('/prof_id')
-def student_id():
+def prof_id():
     return render_template("professorid.html")
 
 @app.route('/student_id')
