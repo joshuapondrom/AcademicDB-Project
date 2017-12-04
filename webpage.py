@@ -27,7 +27,7 @@ def profpersonalid():
     return render_template('profpersonalid.html')
 
 @app.route('/profpersonal', methods=['post'])
-def prefpersonal():
+def profpersonal():
     db = sql.connect('data.db')
     db.row_factory = sql.Row
 
@@ -40,7 +40,7 @@ def prefpersonal():
     ''' %(given_id))
 
     rows = curr.fetchall();
-    return render_template("prefpersonal.html", rows = rows)
+    return render_template("profpersonal.html", rows = rows)
 
 @app.route('/admin')
 def admin():
