@@ -22,6 +22,26 @@ def student():
 def professor():
     return render_template('professor.html')
 
+@app.route('/profpersonalid')
+def profpersonalid():
+    return render_template('profpersonalid.html')
+
+@app.route('/prefpersonal', methods=['post'])
+def prefpersonal():
+    db = sql.connect('data.db')
+    db.row_factory = sql.Row
+
+    given_id = request.form['given_id']
+    curr = db.cursor()
+    curr.execute('''
+      SELECT *
+      FROM Instructor I
+      WHERE I.ID = %s
+    ''' %(given_id))
+
+    rows = curr.fetchall();
+    return render_template("prefpersonal.html", rows = rows)
+
 @app.route('/admin')
 def admin():
     return render_template('admin.html')
