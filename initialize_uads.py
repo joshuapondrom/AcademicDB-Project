@@ -106,6 +106,6 @@ cursor.execute('CREATE TABLE Department('
                '    Program VARCHAR(30) PRIMARY KEY'
                ')')
 connection.commit()
-cursor.execute('INSERT INTO Student VALUES (1, 123 Road, Jack, 1)')
+cursor.execute('INSERT INTO Student VALUES (1, "123 Road", "Jack", 1)')
 connection.commit()
 cursor.close()
