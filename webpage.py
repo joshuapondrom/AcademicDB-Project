@@ -57,12 +57,13 @@ def schedule():
     db = sql.connect('data.db')
     db.row_factory = sql.Row
 
+    given_id = 1
     curr = db.cursor()
     curr.execute('''
       SELECT T.Class_ID, T.Course_ID, C.DayCode, C.Time, R.Room_Number, R.Address
       FROM Takes T, ClassInRoom R, Class C
-      WHERE T.ID = given_id AND T.Class_ID = R.Class_ID AND T.Course_ID = R.Course_ID AND T.Class_ID = C.Class_ID AND T.Course_ID = C.Course_ID AND R.Class_ID = C.Class_ID AND R.Course_ID = C.Course_ID
-    ''')
+      WHERE T.ID = %d AND T.Class_ID = R.Class_ID AND T.Course_ID = R.Course_ID AND T.Class_ID = C.Class_ID AND T.Course_ID = C.Course_ID AND R.Class_ID = C.Class_ID AND R.Course_ID = C.Course_ID
+    ''' %(given_id))
 
     rows = curr.fetchall();
     return render_template("schedule.html", rows = rows)
@@ -106,7 +107,7 @@ def addclass():
       except:
          db.rollback()
          msg = "Error with class information, try again"
-      
+
       finally:
          return render_template("result.html",msg = msg)
          db.close()
@@ -116,12 +117,12 @@ def sendsql():
    if request.method == 'POST':
       try:
          command = request.form['sqlcom']
-         
+
          with sql.connect("data.db") as db:
             curr = db.cursor()
-            
+
             curr.execute(command)
-            
+
             db.commit()
             msg = "Command executed successfully!"
       except:
