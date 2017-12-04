@@ -290,9 +290,21 @@ def enrollclass():
             with sql.connect("data.db") as db:
                 curr = db.cursor()
 
-                #curr.execute()
+                curr.execute(
+                  '''
+                  SELECT C.Class_ID
+                  FROM Class C
+                  WHERE C.Course_ID = Course_ID AND EXISTS ((SELECT K.Course_ID, K.Class_ID
+                                                             FROM Class K)
+                                                             MINUS
+                                                            (SELECT T.Course_ID, T.Class_ID
+                                                             FROM Takes T
+                                                             WHERE T.ID = ID))
+                  '''
+                )
+                Class_ID = curr.fetchone()
+                db.commit()
 
-                db. commit()
                 msg = "Enrolled successfully!"
         except:
             db.rollback()
@@ -301,4 +313,3 @@ def enrollclass():
         finally:
             return render_template("result.html", msg = msg)
             db.close()
-
