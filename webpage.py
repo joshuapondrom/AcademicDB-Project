@@ -271,7 +271,7 @@ def enrollclass():
 
                 #curr.execute()
 
-                db. commit()
+                db.commit()
                 msg = "Enrolled successfully!"
         except:
             db.rollback()
