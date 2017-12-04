@@ -285,7 +285,7 @@ def enrollclass():
     if request.method == 'POST':
         try:
             ID = request.form['ID']
-            Class_ID = request.form['Class_ID']
+            Course_ID = request.form['Course_ID']
 
             with sql.connect("data.db") as db:
                 curr = db.cursor()
