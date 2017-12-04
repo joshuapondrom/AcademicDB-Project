@@ -26,7 +26,7 @@ def professor():
 def profpersonalid():
     return render_template('profpersonalid.html')
 
-@app.route('/prefpersonal', methods=['post'])
+@app.route('/profpersonal', methods=['post'])
 def prefpersonal():
     db = sql.connect('data.db')
     db.row_factory = sql.Row
