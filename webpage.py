@@ -205,3 +205,32 @@ def delstudent():
 @app.route('/deletestudent')
 def dels():
     return render_template('dels.html')
+
+@app.route('/addstudent',methods = ['POST', 'GET'])
+def addstudent():
+   if request.method == 'POST':
+      try:
+         ID = request.form['ID']
+         Address = request.form['Address']
+         Name = request.form['Name']
+         Year = request.form['Year']
+
+         with sql.connect("data.db") as db:
+            curr = db.cursor()
+
+            curr.execute("""INSERT INTO Student(ID,Address,Name,Year)
+               VALUES (?,?,?,?)""",(ID,Address,Name,Year) )
+
+            db.commit()
+            msg = "Student successfully added!"
+      except:
+         db.rollback()
+         msg = "Error with student information, try again"
+
+      finally:
+         return render_template("result.html",msg = msg)
+         db.close()
+
+@app.route('/enterstudent')
+def enterstudent():
+    return render_template('addstudent.html')
