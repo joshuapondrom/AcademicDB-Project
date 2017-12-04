@@ -68,6 +68,10 @@ def schedule():
     rows = curr.fetchall();
     return render_template("schedule.html", rows = rows)
 
+@app.route('/student_id')
+def student_id():
+    return render_template("studentid.html")
+
 @app.route('/classes')
 def classes():
     db = sql.connect('data.db')
