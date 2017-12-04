@@ -83,10 +83,10 @@ def addclass():
                VALUES (?,?,?,?)""",(Class_ID,DayCode,Time,Course_ID) )
             
             db.commit()
-            msg = "Record successfully added"
+            msg = "Class successfully added!"
       except:
          db.rollback()
-         msg = "error in insert operation"
+         msg = "Error with class information, try again"
       
       finally:
          return render_template("result.html",msg = msg)
