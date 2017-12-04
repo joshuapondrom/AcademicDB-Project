@@ -1,0 +1,8 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<form action = "{{ url_for('degree') }}" method = "post">
+  Student ID<br> <input type="text" name="ID"><br>
+  <input type="submit" value="Submit">
+</form>
+{% endblock %}
