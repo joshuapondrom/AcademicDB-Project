@@ -104,9 +104,9 @@ connection.commit()
 cursor.execute('INSERT INTO Student VALUES (3, "999 Way", "Fred", 3)')
 connection.commit()
 
-cursor.execute('INSERT INTO Instructor VALUES (7, "333 Blvd", "Larry", CompSci)')
+cursor.execute('INSERT INTO Instructor VALUES (7, "333 Blvd", "Larry", "CompSci")')
 connection.commit()
-cursor.execute('INSERT INTO Instructor VALUES (8, "444 Lane", "Suzzy", MechEng)')
+cursor.execute('INSERT INTO Instructor VALUES (8, "444 Lane", "Suzzy", "MechEng")')
 connection.commit()
 
 cursor.execute('INSERT INTO Building VALUES ("12 Miner", "Computer Science Building", "CSB")')
