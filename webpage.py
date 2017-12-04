@@ -52,12 +52,12 @@ def students():
     rows = curr.fetchall();
     return render_template("students.html", rows = rows)
 
-@app.route('/schedule')
+@app.route('/schedule', methods=['post'])
 def schedule():
     db = sql.connect('data.db')
     db.row_factory = sql.Row
 
-    given_id = 1
+    given_id = request.form['given_id']
     curr = db.cursor()
     curr.execute('''
       SELECT T.Class_ID, T.Course_ID, C.DayCode, C.Time, R.Room_Number, R.Address
