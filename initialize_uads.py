@@ -49,7 +49,7 @@ connection.commit()
 cursor.execute('CREATE TABLE Course('
                '    Course_ID VARCHAR(15) PRIMARY KEY,'
                '    Major VARCHAR(30),'
-               '    Credit_Hourse INTEGER'
+               '    Credit_Hours INTEGER'
                ')')
 connection.commit()
 cursor.execute('CREATE TABLE Takes('
@@ -105,5 +105,7 @@ connection.commit()
 cursor.execute('CREATE TABLE Department('
                '    Program VARCHAR(30) PRIMARY KEY'
                ')')
+connection.commit()
+cursor.execute('INSERT INTO Student VALUES (1, 123 Road, Jack, 1)')
 connection.commit()
 cursor.close()
