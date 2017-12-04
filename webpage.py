@@ -53,7 +53,7 @@ def students():
     return render_template("students.html", rows = rows)
 
 @app.route('/schedule')
-def classes():
+def schedule():
     db = sql.connect('data.db')
     db.row_factory = sql.Row
 
