@@ -67,6 +67,10 @@ def classes():
 def enterclass():
     return render_template('addclass.html')
 
+@app.route('/sql')
+def sqlcom():
+    return render_template('sql.html')
+
 @app.route('/addclass',methods = ['POST', 'GET'])
 def addclass():
    if request.method == 'POST':
@@ -87,6 +91,27 @@ def addclass():
       except:
          db.rollback()
          msg = "Error with class information, try again"
+      
+      finally:
+         return render_template("result.html",msg = msg)
+         db.close()
+
+@app.route('/sendsql',methods = ['POST','GET'])
+def sendsql():
+   if request.method == 'POST':
+      try:
+         command = request.form['sqlcom']
+         
+         with sql.connect("data.db") as db:
+            curr = db.cursor()
+            
+            curr.execute(command)
+            
+            db.commit()
+            msg = "Command executed successfully!"
+      except:
+         db.rollback()
+         msg = "Error with command, try again"
       
       finally:
          return render_template("result.html",msg = msg)
