@@ -1,4 +1,5 @@
 from flask import Flask, render_template, flash, redirect, url_for, session, request, logging
+import sqlite3 as sql
 #from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -39,3 +40,14 @@ def searchclass():
         'list.html',
         rows = rows
     )
+
+@app.route('/class')
+def list():
+    db = sql.connect('data.db')
+    db.row_factory = sql.Row
+
+    curr = db.cursor()
+    curr.execute("Select * from Student")
+
+    rows = curr.fetchall();
+    return render_template("class.html", rows = rows)
