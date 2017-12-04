@@ -29,11 +29,13 @@ def admin():
 def searchclass():
     given_courseID = request.form['form-field']
     cursor = connection.cursor()
-    matching_classes = cursor.execute(
+    cursor.execute(
         'SELECT *'
         'FROM Class C'
         'WHERE C.Course_ID = given_courseID'
-    ).fetchall()
+    )
+    rows = cursor.fetchall()
     return render_template(
-        'list.html', 
+        'list.html',
+        rows = rows
     )
