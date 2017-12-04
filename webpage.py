@@ -52,6 +52,21 @@ def students():
     rows = curr.fetchall();
     return render_template("students.html", rows = rows)
 
+@app.route('/schedule')
+def classes():
+    db = sql.connect('data.db')
+    db.row_factory = sql.Row
+
+    curr = db.cursor()
+    curr.execute('''
+      SELECT T.Class_ID, T.Course_ID, C.DayCode, C.Time, R.Room_Number, R.Address
+      FROM Takes T, ClassInRoom R, Class C
+      WHERE T.ID = given_id AND T.Class_ID = R.Class_ID AND T.Course_ID = R.Course_ID AND T.Class_ID = C.Class_ID AND T.Course_ID = C.Course_ID AND R.Class_ID = C.Class_ID AND R.Course_ID = C.Course_ID
+    ''')
+
+    rows = curr.fetchall();
+    return render_template("schedule.html", rows = rows)
+
 @app.route('/classes')
 def classes():
     db = sql.connect('data.db')
@@ -75,19 +90,19 @@ def addclass():
          DayCode = request.form['DayCode']
          Time = request.form['Time']
          Course_ID = request.form['Course_ID']
-         
+
          with sql.connect("data.db") as db:
             curr = db.cursor()
-            
-            curr.execute("""INSERT INTO Class(Class_ID,DayCode,Time,Course_ID) 
+
+            curr.execute("""INSERT INTO Class(Class_ID,DayCode,Time,Course_ID)
                VALUES (?,?,?,?)""",(Class_ID,DayCode,Time,Course_ID) )
-            
+
             db.commit()
             msg = "Record successfully added"
       except:
          db.rollback()
          msg = "error in insert operation"
-      
+
       finally:
          return render_template("result.html",msg = msg)
          db.close()

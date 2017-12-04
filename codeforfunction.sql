@@ -18,17 +18,16 @@ Select *
 FROM Takes T
 WHERE T.ID = given_id
 UNION   #I think this combines the two tables into one big table
-Select * 
+Select *
 FROM Requires R
 WHERE R.taken = false AND R.ID = given_id
-#Don't forget to display the GPA View
+#Dont forget to display the GPA View
 
-#Generate Instructor Schedule
-SELECT 
-FROM TaughtBy T, Class C, Room R
-WHERE 
+#Generate Student Schedule
+SELECT T.Class_ID, T.Course_ID, C.DayCode, C.Time, R.Room_Number, R.Address
+FROM Takes T, ClassInRoom R, Class C
+WHERE T.Class_ID = R.Class_ID AND T.Course_ID = R.Course_ID AND T.Class_ID = C.Class_ID AND T.Course_ID = C.Course_ID AND R.Class_ID = C.Class_ID AND R.Course_ID = C.Course_ID
 
 #Generate Student Schedule
 
 #Class Sign-Up
-
