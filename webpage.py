@@ -310,8 +310,17 @@ def degree():
     ID = request.form['ID']
     curr = db.cursor()
     curr.execute('''
+                 SELECT *
+                 FROM Requires R
+                 WHERE R.ID = %s AND NOT EXIST((SELECT Q.Course_ID
+                                                FROM Requires Q
+                                                WHERE Q.ID = %s)
+                                                MINUS
+                                               (SELECT Course_ID
+                                                FROM Takes T
+                                                WHERE T.ID = %s))
  
-    ''' %(ID))
+    ''' %(ID, ID, ID))
 
     rows = curr.fetchall();
     return render_template("degree.html", rows = rows)
