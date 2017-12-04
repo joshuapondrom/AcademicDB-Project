@@ -1,0 +1,20 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+      <table border = 1>
+         <thead>
+            <td>ID</td>
+            <td>Address</td>
+            <td>Name</td>
+            <td>Year</td>
+         </thead>
+         {% for row in rows %}
+            <tr>
+               <td>{{row["ID"]}}</td>
+               <td>{{row["Address"]}}</td>
+               <td>{{row["Name"]}}</td>
+               <td>{{row["Year"]}}</td>
+            </tr>
+         {% endfor %}
+      </table>	
+{% endblock %}
