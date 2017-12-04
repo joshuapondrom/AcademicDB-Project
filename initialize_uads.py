@@ -3,19 +3,19 @@ connection = sqlite3.connect('data.db')
 cursor = connection.cursor()
 cursor.execute('CREATE TABLE Student('
                '    ID INTEGER PRIMARY KEY,'
-               '    address VARCHAR(100),'
+               '    Address VARCHAR(100),'
                '    Name VARCHAR(30),'
                '    Year INTEGER'
                ')')
 connection.commit()
 cursor.execute('CREATE TABLE Building('
-               '    address VARCHAR(30) PRIMARY KEY,'
+               '    Address VARCHAR(30) PRIMARY KEY,'
                '    Name VARCHAR(30),'
                '    Abbr VARCHAR(5)'
                ')')
 cursor.execute('CREATE TABLE Instructor('
                '    ID INTEGER PRIMARY KEY,'
-               '    address VARCHAR(100),'
+               '    Address VARCHAR(100),'
                '    Name VARCHAR(30),'
                '    Dept VARCHAR(30),'
                '    FOREIGN KEY(Dept) REFERENCES Department(Program)'
@@ -62,7 +62,7 @@ cursor.execute('CREATE TABLE Takes('
                '    FOREIGN KEY(Class_ID) REFERENCES Class(Class_ID),'
                '    FOREIGN KEY(Course_ID) REFERENCES Course(Course_ID)'
                ')')
-connection.commit()               
+connection.commit()
 cursor.execute('CREATE TABLE ClassInRoom('
                '    Course_ID VARCHAR(15),'
                '    Class_ID CHAR(5),'
@@ -74,7 +74,7 @@ cursor.execute('CREATE TABLE ClassInRoom('
                '    FOREIGN KEY(Room_Number) REFERENCES Room(Room_Number),'
                '    FOREIGN KEY(Address) REFERENCES Building(address)'
                ')')
-connection.commit()               
+connection.commit()
 cursor.execute('CREATE TABLE TaughtBy('
                '    ID INTEGER,'
                '    Class_ID CHAR(5),'
@@ -84,7 +84,7 @@ cursor.execute('CREATE TABLE TaughtBy('
                '    FOREIGN KEY(Class_ID) REFERENCES Class(Class_ID),'
                '    FOREIGN KEY(Course_ID) REFERENCES Course(Course_ID)'
                ')')
-connection.commit()               
+connection.commit()
 cursor.execute('CREATE TABLE Requires('
                '    ID INTEGER,'
                '    Course_ID VARCHAR(15),'
@@ -92,7 +92,7 @@ cursor.execute('CREATE TABLE Requires('
                '    FOREIGN KEY(ID) REFERENCES Student(ID),'
                '    FOREIGN KEY(Course_ID) REFERENCES Course(Course_ID)'
                ')')
-connection.commit()               
+connection.commit()
 cursor.execute('CREATE TABLE EmergencyContact('
                '    Phone_Number CHAR(10),'
                '    Address VARCHAR(100),'
@@ -101,7 +101,7 @@ cursor.execute('CREATE TABLE EmergencyContact('
                '    ID INTEGER,'
                '    PRIMARY KEY(ID, Name)'
                ')')
-connection.commit()               
+connection.commit()
 cursor.execute('CREATE TABLE Department('
                '    Program VARCHAR(30) PRIMARY KEY'
                ')')
