@@ -254,3 +254,30 @@ def addstudent():
 @app.route('/enterstudent')
 def enterstudent():
     return render_template('addstudent.html')
+
+@app.route('/enroll')
+def enroll():
+    return render_template('enroll.html')
+
+@app.route('/enrollclass', methods = ['POST', 'GET'])
+def enrollclass():
+    if request.method == 'POST':
+        try:
+            ID = request.form['ID']
+            Class_ID = request.form['Class_ID']
+
+            with sql.connect("data.db") as db:
+                curr = db.cursor()
+
+                #curr.execute()
+
+                db. commit()
+                msg = "Enrolled successfully!"
+        except:
+            db.rollback()
+            msg = "Error with entry, try again"
+
+        finally:
+            return render_template("result.html", msg = msg)
+            db.close()
+
