@@ -93,19 +93,70 @@ cursor.execute('CREATE TABLE Requires('
                '    FOREIGN KEY(Course_ID) REFERENCES Course(Course_ID)'
                ')')
 connection.commit()
-cursor.execute('CREATE TABLE EmergencyContact('
-               '    Phone_Number CHAR(10),'
-               '    Address VARCHAR(100),'
-               '    Name VARCHAR(30),'
-               '    Relation VARCHAR(30),'
-               '    ID INTEGER,'
-               '    PRIMARY KEY(ID, Name)'
-               ')')
-connection.commit()
 cursor.execute('CREATE TABLE Department('
                '    Program VARCHAR(30) PRIMARY KEY'
                ')')
 connection.commit()
 cursor.execute('INSERT INTO Student VALUES (1, "123 Road", "Jack", 1)')
+connection.commit()
+cursor.execute('INSERT INTO Student VALUES (2, "456 Lane", "Jill", 2)')
+connection.commit()
+cursor.execute('INSERT INTO Student VALUES (3, "999 Way", "Fred", 3)')
+connection.commit()
+
+cursor.execute('INSERT INTO Instructor VALUES (7, "333 Blvd", "Larry", CompSci)')
+connection.commit()
+cursor.execute('INSERT INTO Instructor VALUES (8, "444 Lane", "Suzzy", MechEng)')
+connection.commit()
+
+cursor.execute('INSERT INTO Building VALUES ("12 Miner", "Computer Science Building", "CSB")')
+connection.commit()
+cursor.execute('INSERT INTO Building VALUES ("13 Miner", "Mechanical Eng Building", "MEB")')
+connection.commit()
+
+cursor.execute('INSERT INTO Located VALUES ("CompSci", "12 Miner")')
+connection.commit()
+cursor.execute('INSERT INTO Located VALUES ("MechEng", "13 Miner")')
+connection.commit()
+
+cursor.execute('INSERT INTO Course VALUES ("CS2300", "CompSci", 3)')
+connection.commit()
+cursor.execute('INSERT INTO Course VALUES ("MCE1120", "MechEng", 3)')
+connection.commit()
+
+cursor.execute('INSERT INTO Class VALUES ("L0305", "10101",2,"CS2300")')
+connection.commit()
+cursor.execute('INSERT INTO Class VALUES ("Y0306", "01010",3,"MCE1120")')
+connection.commit()
+
+cursor.execute('INSERT INTO Requires VALUES (1, "CS2300")')
+connection.commit()
+cursor.execute('INSERT INTO Requires VALUES (2, "MCE1120")')
+connection.commit()
+cursor.execute('INSERT INTO Requires VALUES (3, "CS2300")')
+connection.commit()
+cursor.execute('INSERT INTO Requires VALUES (3, "MCE1120")')
+connection.commit()
+
+cursor.execute('INSERT INTO TaughtBy VALUES (7, "L0305", "CS2300")')
+connection.commit()
+cursor.execute('INSERT INTO TaughtBy VALUES (8, "Y0306", "MCE1120")')
+connection.commit()
+
+cursor.execute('INSERT INTO Room VALUES ("Classroom", 101, "12 Mines")')
+connection.commit()
+cursor.execute('INSERT INTO Room VALUES ("Classroom", 101, "13 Mines")')
+connection.commit()
+
+cursor.execute('INSERT INTO Takes VALUES (1, "L0305", "CS2300", 3.8)')
+connection.commit()
+cursor.execute('INSERT INTO Takes VALUES (2, "Y0306", "MCE1120", 4.0)')
+connection.commit()
+cursor.execute('INSERT INTO Takes VALUES (3, "L0305", "CS2300", 4.0)')
+connection.commit()
+
+cursor.execute('INSERT INTO ClassInRoom VALUES ("CS2300", "L0305", 101, "12 Mines")')
+connection.commit()
+cursor.execute('INSERT INTO ClassInRoom VALUES ("MCE1120", "Y0306", 101, "13 Mines")')
 connection.commit()
 cursor.close()
