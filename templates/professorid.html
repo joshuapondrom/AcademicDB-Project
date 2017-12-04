@@ -1,0 +1,8 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<form action = "{{ url_for('profschedule') }}" method = "post">
+  student_id: <input type="text" name="given_id"><br>
+  <input type="submit" value="Submit">
+</form>
+{% endblock %}
