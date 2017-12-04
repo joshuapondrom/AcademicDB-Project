@@ -18,6 +18,10 @@ def about():
 def student():
     return render_template('student.html')
 
+@app.route('/stupersonalid')
+def stupersonalid():
+    return render_template('stupersonalid.html')
+
 @app.route('/professor')
 def professor():
     return render_template('professor.html')
@@ -25,6 +29,23 @@ def professor():
 @app.route('/profpersonalid')
 def profpersonalid():
     return render_template('profpersonalid.html')
+
+@app.route('/stupersonal', methods=['post'])
+def stupersonal():
+    db = sql.connect('data.db')
+    db.row_factory = sql.Row
+
+    given_id = request.form['given_id']
+    curr = db.cursor()
+    curr.execute('''
+      SELECT *
+      FROM Student S
+      WHERE S.ID = %s
+    ''' %(given_id))
+
+    rows = curr.fetchall();
+    return render_template("stupersonal.html", rows = rows)
+
 
 @app.route('/profpersonal', methods=['post'])
 def profpersonal():
