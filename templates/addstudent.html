@@ -1,0 +1,20 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+    <form action = "{{ url_for('addstudent') }}" method = "POST">
+	 <h3>Add a student</h3><br>
+         Student ID<br>
+         <input type = "text" name = "ID" /></br>
+         
+         Address<br>
+         <input type = "text" name = "Address" ></textarea><br>
+         
+         Name<br>
+         <input type = "text" name = "Name" /><br>
+         
+         Year<br>
+         <input type = "text" name = "Year" /><br>
+	 <br>
+         <input type = "submit" value = "submit" /><br>
+    </form>	
+{% endblock %}
