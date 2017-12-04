@@ -285,7 +285,7 @@ def enrollclass():
     if request.method == 'POST':
         try:
             ID = request.form['ID']
-            Class_ID = request.form['Class_ID']
+            Course_ID = request.form['Course_ID']
 
             with sql.connect("data.db") as db:
                 curr = db.cursor()
@@ -313,3 +313,21 @@ def enrollclass():
         finally:
             return render_template("result.html", msg = msg)
             db.close()
+
+@app.route('/degree', methods=['post'])
+def degree():
+    db = sql.connect('data.db')
+    db.row_factory = sql.Row
+
+    ID = request.form['ID']
+    curr = db.cursor()
+    curr.execute('''
+ 
+    ''' %(ID))
+
+    rows = curr.fetchall();
+    return render_template("degree.html", rows = rows)
+
+@app.route('/degreeid')
+def degreeid():
+    return render_template('degreeid.html')

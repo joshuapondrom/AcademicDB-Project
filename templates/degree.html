@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+  <div class="text-left" align="Left">
+    <h1>Classes left to take</h1>
+  </div>
+  <table border = 1>
+     <thead>
+        <td>Class_ID</td>
+        <td>DayCode</td>
+        <td>Time</td>
+        <td>CourseID</td>
+     </thead>
+     {% for row in rows %}
+        <tr>
+           <td>{{row["Class_ID"]}}</td>
+           <td>{{row["DayCode"]}}</td>
+           <td>{{row["Time"]}}</td>
+           <td>{{row["CourseID"]}}</td>
+        </tr>
+     {% endfor %}
+  </table>
+{% endblock %}

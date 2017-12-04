@@ -1,0 +1,13 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+    <form action = "{{ url_for('enrollclass') }}" method = "POST">
+	 <h3>Enroll in a class</h3><br>
+         Student ID<br>
+         <input type = "text" name = "ID" /></br>
+         
+         Course ID<br>
+         <input type = "text" name = "Course_ID" ></textarea><br>
+         <input type = "submit" value = "submit" /><br>
+    </form>	
+{% endblock %}
