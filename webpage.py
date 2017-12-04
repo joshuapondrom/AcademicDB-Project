@@ -62,7 +62,7 @@ def schedule():
     curr.execute('''
       SELECT T.Class_ID, T.Course_ID, C.DayCode, C.Time, R.Room_Number, R.Address
       FROM Takes T, ClassInRoom R, Class C
-      WHERE T.ID = %d AND T.Class_ID = R.Class_ID AND T.Course_ID = R.Course_ID AND T.Class_ID = C.Class_ID AND T.Course_ID = C.Course_ID AND R.Class_ID = C.Class_ID AND R.Course_ID = C.Course_ID
+      WHERE T.ID = %s AND T.Class_ID = R.Class_ID AND T.Course_ID = R.Course_ID AND T.Class_ID = C.Class_ID AND T.Course_ID = C.Course_ID AND R.Class_ID = C.Class_ID AND R.Course_ID = C.Course_ID
     ''' %(given_id))
 
     rows = curr.fetchall();
@@ -135,3 +135,53 @@ def sendsql():
       finally:
          return render_template("result.html",msg = msg)
          db.close()
+
+@app.route('/delclass',methods = ['POST', 'GET'])
+def delclass():
+    if request.method == 'POST':
+      try:
+         Class_ID = request.form['Class_ID']
+
+         with sql.connect("data.db") as db:
+            curr = db.cursor()
+
+            curr.execute("""DELETE FROM Class
+                            WHERE Class.Class_ID = %s""" % (Class_ID))
+
+            db.commit()
+            msg = "Class deleted!"
+      except:
+         db.rollback()
+         msg = "Error with class deletion, try again"
+
+      finally:
+         return render_template("result.html",msg = msg)
+
+@app.route('/deleteclass')
+def delc():
+    return render_template('del.html')
+
+@app.route('/delstudent',methods = ['POST', 'GET'])
+def delstudent():
+    if request.method == 'POST':
+      try:
+         ID = request.form['ID']
+
+         with sql.connect("data.db") as db:
+            curr = db.cursor()
+
+            curr.execute("""DELETE FROM Student
+                            WHERE Student.ID = %s""" % (ID))
+
+            db.commit()
+            msg = "Student deleted!"
+      except:
+         db.rollback()
+         msg = "Error with student deletion, try again"
+
+      finally:
+         return render_template("result.html",msg = msg)
+
+@app.route('/deletestudent')
+def dels():
+    return render_template('dels.html')

@@ -1,0 +1,9 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+	<form action = "{{ url_for('delclass') }}" method = "POST">
+	   Class ID to delete<br>
+	   <input type = "text" name = "Class_ID" /></br>
+	   <input type = "submit" value = "submit" /><br>
+	</form>	
+{% endblock %}
